@@ -10,7 +10,7 @@ def generate_launch_description():
                 package="xv_11_driver",
                 executable="xv_11_driver",
                 output="screen",
-                parameters=[{"serial_port": "/dev/ttyACM0", "frame_id": "laser_frame"}],
+                parameters=[{"port": "/dev/ttyACM0", "frame_id": "laser_frame"}],
             )
         ]
     )
