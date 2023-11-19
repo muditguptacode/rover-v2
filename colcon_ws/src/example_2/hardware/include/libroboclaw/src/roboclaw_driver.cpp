@@ -254,11 +254,11 @@ namespace libroboclaw {
         return std::pair<int, int>((int) (int32_t) e1, (int) (int32_t) e2);
     }
 
-    bool isConnected() {
+    bool driver::isConnected() {
         return serial->isOpen();
     }
 
-    void close() {
+    void driver::close() {
         serial->close();
     }
 

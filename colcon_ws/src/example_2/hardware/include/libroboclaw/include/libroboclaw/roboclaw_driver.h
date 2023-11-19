@@ -31,12 +31,14 @@
 #include <boost/thread/mutex.hpp>
 #include "TimeoutSerial.h"
 
-namespace libroboclaw {
+namespace libroboclaw
+{
 
     template <typename T>
-    using pair2 = std::pair<std::pair<T, T>, std::pair<T, T>>; 
+    using pair2 = std::pair<std::pair<T, T>, std::pair<T, T>>;
 
-    class driver {
+    class driver
+    {
 
     public:
         driver(std::string port, unsigned int baudrate);
@@ -56,7 +58,7 @@ namespace libroboclaw {
          * Get the pwm values of the 2 motors at a given address
          */
         std::pair<int, int> get_pwm(const unsigned char address);
-        
+
         /**
          * Get the percentage duty cycle of the 2 motors at a given address
          */
@@ -70,7 +72,7 @@ namespace libroboclaw {
 
         /**
          * Read errors if any are present
-         * 
+         *
          * Normal 0x000000
          * E-Stop 0x000001
          * Temperature Error 0x000002
@@ -95,7 +97,7 @@ namespace libroboclaw {
          * S4 Signal Triggered 0x400000
          * S5 Signal Triggered 0x800000
          * Speed Error Limit Warning 0x01000000
-         * Position Error Limit Warning 0x02000000        
+         * Position Error Limit Warning 0x02000000
          */
         int get_status(const unsigned char address);
 
@@ -143,7 +145,7 @@ namespace libroboclaw {
          *
          * So for example a value of 8355(dec) = 0010000010100011(bin) = 20A3 (hex)
          * would mean 0x2000 (swap encoders), 0x0000 (packet address 0x80/128),
-         * 0x00A0 (baudrate 115200), 0x0003 (packet serial mode)        
+         * 0x00A0 (baudrate 115200), 0x0003 (packet serial mode)
          */
         int get_config(const unsigned char address);
 
@@ -162,15 +164,15 @@ namespace libroboclaw {
          * the motor will begin to accelerate as fast as possible until the rate defined is reached.
          *
          * 4 Bytes (long) are used to express the pulses per second. Quadrature encoders send 4 pulses
-         * per tick. So 1000 ticks would be counted as 4000 pulses. 
-        */
+         * per tick. So 1000 ticks would be counted as 4000 pulses.
+         */
         void set_velocity(unsigned char address, std::pair<int, int> speed);
 
         /*
          * Drive both M1 and M2 using a duty cycle value. The duty cycle is used to control the speed of
-         * the motor without a quadrature encoder. 
-         * The duty value is signed and the range is -32768 to +32767 (eg. +-100% duty). 
-        */
+         * the motor without a quadrature encoder.
+         * The duty value is signed and the range is -32768 to +32767 (eg. +-100% duty).
+         */
         void set_duty(unsigned char address, std::pair<int, int> duty);
 
         /*
@@ -178,12 +180,12 @@ namespace libroboclaw {
          * For possible values, see get_config
          * example:
          * To set the address of a roboclaw that's by default
-         * at 128(dec) / 0x80(hex) to X (e.g. 129), call 
+         * at 128(dec) / 0x80(hex) to X (e.g. 129), call
          * get_config(128) and add (X-128)*256 to the result,
          * then set_config() with this sum. The address should
          * have changed while other configuration will have
          * stayed the same.
-        */
+         */
         void set_config(unsigned char address, int config);
 
         void reset_encoders(unsigned char address);
@@ -206,33 +208,35 @@ namespace libroboclaw {
 
         size_t txrx(unsigned char address, unsigned char command, unsigned char *tx_data, size_t tx_length,
                     unsigned char *rx_data, size_t rx_length, bool tx_crc = false, bool rx_crc = false);
-
-
     };
 
-    class crc_exception : public std::runtime_error {
+    class crc_exception : public std::runtime_error
+    {
     public:
         using std::runtime_error::runtime_error;
     };
 
     // trim from start (in place)
-    static inline void ltrim(std::string &s) {
-        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
-            return !std::isspace(ch);
-        }));
+    static inline void ltrim(std::string &s)
+    {
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch)
+                                        { return !std::isspace(ch); }));
     }
 
-// trim from end (in place)
-    static inline void rtrim(std::string &s) {
-        s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
-            return !std::isspace(ch);
-        }).base(), s.end());
+    // trim from end (in place)
+    static inline void rtrim(std::string &s)
+    {
+        s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch)
+                             { return !std::isspace(ch); })
+                    .base(),
+                s.end());
     }
 
-// trim from both ends (in place)
-    static inline void trim(std::string &s) {
+    // trim from both ends (in place)
+    static inline void trim(std::string &s)
+    {
         ltrim(s);
         rtrim(s);
     }
 }
-#endif //PROJECT_ROBOCLAWDRIVER_H
+#endif // PROJECT_ROBOCLAWDRIVER_H

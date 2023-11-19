@@ -34,7 +34,7 @@
         <state_interface name="position" />
         <state_interface name="velocity" />
       </joint>
-      <joint name="${prefix}left_front_wheel_joint">
+      <joint name="${prefix}left_back_wheel_joint">
         <command_interface name="velocity" />
         <state_interface name="position" />
         <state_interface name="velocity" />

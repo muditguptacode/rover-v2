@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(ros2_control_demo_example_2 LANGUAGES CXX)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
-  add_compile_options(-Wall -Wextra)
+  add_compile_options(-Wall -Wextra -fPIC)
 endif()
 
 # find dependencies
@@ -15,6 +15,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(Boost 1.55.0 REQUIRED COMPONENTS system filesystem)
 foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
@@ -26,6 +27,19 @@ add_library(
   SHARED
   hardware/diffbot_system.cpp
 )
+
+add_library(libroboclaw
+  hardware/include/libroboclaw/src/roboclaw_driver.cpp
+  hardware/include/libroboclaw/src/TimeoutSerial.cpp
+)
+
+target_include_directories(libroboclaw
+    PUBLIC
+        ${PROJECT_SOURCE_DIR}/hardware/include/libroboclaw/include
+    PRIVATE
+        ${Boost_INCLUDE_DIRS}
+)
+
 target_compile_features(ros2_control_demo_example_2 PUBLIC cxx_std_17)
 target_include_directories(ros2_control_demo_example_2 PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
@@ -37,6 +51,7 @@ ament_target_dependencies(
 )
 
 # target_link_libraries(ros2_control_demo_example_2 PUBLIC serial)
+target_link_libraries(ros2_control_demo_example_2 PRIVATE libroboclaw)
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
