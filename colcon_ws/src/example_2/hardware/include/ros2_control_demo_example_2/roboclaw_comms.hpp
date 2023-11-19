@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include "libroboclaw/include/libroboclaw/roboclaw_driver.h"
+#include "libroboclaw/libroboclawConfig.h"
 
 class RoboclawComms
 {
@@ -14,7 +15,8 @@ public:
     void connect(const std::string &serial_device, int32_t baud_rate, int32_t timeout_ms)
     {
         timeout_ms_ = timeout_ms;
-        roboclaw_connections = new libroboclaw::driver(serial_device, baud_rate);
+        // roboclaw_connections = new libroboclaw::driver(serial_device, baud_rate);
+        roboclaw_connections = new libroboclaw::driver("/dev/ttyACM0", 38400);
     }
 
     void disconnect()

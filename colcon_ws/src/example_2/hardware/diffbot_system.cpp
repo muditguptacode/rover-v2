@@ -161,6 +161,9 @@ namespace ros2_control_demo_example_2
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
     RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Activating ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), config_.device.c_str());
+    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), std::to_string(config_.baud_rate).c_str());
+    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), std::to_string(config_.timeout_ms).c_str());
 
     roboclaw_comms_.connect(config_.device, config_.baud_rate, config_.timeout_ms);
 
