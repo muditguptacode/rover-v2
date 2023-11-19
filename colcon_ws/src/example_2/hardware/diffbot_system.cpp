@@ -185,7 +185,25 @@ namespace ros2_control_demo_example_2
       const rclcpp::Time & /*time*/, const rclcpp::Duration &period)
   {
 
-    //  roboclaw_comms_.read_encoder_values();
+    roboclaw_comms_.read_encoder_values(wheel_lf_.enc, wheel_lb_.enc, wheel_rf_.enc, wheel_rb_.enc);
+
+    double delta_seconds = period.seconds();
+
+    double pos_prev = wheel_lf_.pos;
+    wheel_lf_.pos = wheel_lf_.calc_enc_angle();
+    wheel_lf_.vel = (wheel_lf_.pos - pos_prev) / delta_seconds;
+
+    pos_prev = wheel_lb_.pos;
+    wheel_lb_.pos = wheel_lb_.calc_enc_angle();
+    wheel_lb_.vel = (wheel_lb_.pos - pos_prev) / delta_seconds;
+
+    pos_prev = wheel_rf_.pos;
+    wheel_rf_.pos = wheel_rf_.calc_enc_angle();
+    wheel_rf_.vel = (wheel_rf_.pos - pos_prev) / delta_seconds;
+
+    pos_prev = wheel_rb_.pos;
+    wheel_rb_.pos = wheel_rb_.calc_enc_angle();
+    wheel_rb_.vel = (wheel_rb_.pos - pos_prev) / delta_seconds;
 
     return hardware_interface::return_type::OK;
   }
@@ -193,10 +211,13 @@ namespace ros2_control_demo_example_2
   hardware_interface::return_type ros2_control_demo_example_2 ::DiffBotSystemHardware::write(
       const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
   {
-    // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
     RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Writing...");
 
-    //  roboclaw_comms_.set_motor_values();
+    int motor_lf_qpps = wheel_lf_.cmd / wheel_lf_.rads_per_count;
+    int motor_lb_qpps = wheel_lb_.cmd / wheel_lb_.rads_per_count;
+    int motor_rf_qpps = wheel_rf_.cmd / wheel_rf_.rads_per_count;
+    int motor_rb_qpps = wheel_rf_.cmd / wheel_rf_.rads_per_count;
+    roboclaw_comms_.set_motor_values(motor_lf_qpps, motor_lb_qpps, motor_rf_qpps, motor_rb_qpps);
 
     return hardware_interface::return_type::OK;
   }

@@ -35,11 +35,12 @@ public:
         val_2 = enc_res_left.second;
         val_3 = enc_res_right.first;
         val_4 = enc_res_right.second;
-        // val_1 = std::atoi(token_1.c_str());
-        // val_2 = std::atoi(token_2.c_str());
     }
-    void set_motor_values(int val_1, int val_2)
+
+    void set_motor_values(int motor_lf_qpps, int motor_lb_qpps, int motor_rf_qpps, int motor_rb_qpps)
     {
+        roboclaw_connections->set_velocity(left_addr, {motor_lf_qpps, motor_lb_qpps});
+        roboclaw_connections->set_velocity(right_addr, {motor_rf_qpps, motor_rb_qpps});
     }
 
 private:
