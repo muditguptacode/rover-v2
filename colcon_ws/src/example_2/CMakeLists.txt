@@ -36,7 +36,7 @@ ament_target_dependencies(
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
-target_link_libraries(ros2_control_demo_example_2 PUBLIC serial)
+# target_link_libraries(ros2_control_demo_example_2 PUBLIC serial)
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.

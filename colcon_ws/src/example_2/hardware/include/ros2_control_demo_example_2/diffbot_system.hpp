@@ -50,7 +50,7 @@ namespace ros2_control_demo_example_2
       int baud_rate = 0;
       int timeout_ms = 0;
       int enc_counts_per_rev = 0;
-    }
+    };
 
     public : RCLCPP_SHARED_PTR_DEFINITIONS(DiffBotSystemHardware);
 
