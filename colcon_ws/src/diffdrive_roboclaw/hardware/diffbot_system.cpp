@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "ros2_control_demo_example_2/diffbot_system.hpp"
+#include "diffdrive_roboclaw/diffbot_system.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -24,9 +24,9 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-namespace ros2_control_demo_example_2
+namespace diffdrive_roboclaw
 {
-  hardware_interface::CallbackReturn DiffBotSystemHardware::on_init(
+  hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_init(
       const hardware_interface::HardwareInfo &info)
   {
     if (
@@ -57,7 +57,7 @@ namespace ros2_control_demo_example_2
       if (joint.command_interfaces.size() != 1)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffBotSystemHardware"),
+            rclcpp::get_logger("DiffDriveRoboclawHardware"),
             "Joint '%s' has %zu command interfaces found. 1 expected.", joint.name.c_str(),
             joint.command_interfaces.size());
         return hardware_interface::CallbackReturn::ERROR;
@@ -66,7 +66,7 @@ namespace ros2_control_demo_example_2
       if (joint.command_interfaces[0].name != hardware_interface::HW_IF_VELOCITY)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffBotSystemHardware"),
+            rclcpp::get_logger("DiffDriveRoboclawHardware"),
             "Joint '%s' have %s command interfaces found. '%s' expected.", joint.name.c_str(),
             joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_VELOCITY);
         return hardware_interface::CallbackReturn::ERROR;
@@ -75,7 +75,7 @@ namespace ros2_control_demo_example_2
       if (joint.state_interfaces.size() != 2)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffBotSystemHardware"),
+            rclcpp::get_logger("DiffDriveRoboclawHardware"),
             "Joint '%s' has %zu state interface. 2 expected.", joint.name.c_str(),
             joint.state_interfaces.size());
         return hardware_interface::CallbackReturn::ERROR;
@@ -84,7 +84,7 @@ namespace ros2_control_demo_example_2
       if (joint.state_interfaces[0].name != hardware_interface::HW_IF_POSITION)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffBotSystemHardware"),
+            rclcpp::get_logger("DiffDriveRoboclawHardware"),
             "Joint '%s' have '%s' as first state interface. '%s' expected.", joint.name.c_str(),
             joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
         return hardware_interface::CallbackReturn::ERROR;
@@ -93,7 +93,7 @@ namespace ros2_control_demo_example_2
       if (joint.state_interfaces[1].name != hardware_interface::HW_IF_VELOCITY)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffBotSystemHardware"),
+            rclcpp::get_logger("DiffDriveRoboclawHardware"),
             "Joint '%s' have '%s' as second state interface. '%s' expected.", joint.name.c_str(),
             joint.state_interfaces[1].name.c_str(), hardware_interface::HW_IF_VELOCITY);
         return hardware_interface::CallbackReturn::ERROR;
@@ -103,7 +103,7 @@ namespace ros2_control_demo_example_2
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  std::vector<hardware_interface::StateInterface> DiffBotSystemHardware::export_state_interfaces()
+  std::vector<hardware_interface::StateInterface> DiffDriveRoboclawHardware::export_state_interfaces()
   {
     std::vector<hardware_interface::StateInterface> state_interfaces;
 
@@ -134,7 +134,7 @@ namespace ros2_control_demo_example_2
     return state_interfaces;
   }
 
-  std::vector<hardware_interface::CommandInterface> DiffBotSystemHardware::export_command_interfaces()
+  std::vector<hardware_interface::CommandInterface> DiffDriveRoboclawHardware::export_command_interfaces()
   {
     std::vector<hardware_interface::CommandInterface> command_interfaces;
 
@@ -157,34 +157,34 @@ namespace ros2_control_demo_example_2
     return command_interfaces;
   }
 
-  hardware_interface::CallbackReturn DiffBotSystemHardware::on_activate(
+  hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_activate(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Activating ...please wait...");
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), config_.device.c_str());
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), std::to_string(config_.baud_rate).c_str());
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), std::to_string(config_.timeout_ms).c_str());
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Activating ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), config_.device.c_str());
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), std::to_string(config_.baud_rate).c_str());
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), std::to_string(config_.timeout_ms).c_str());
 
     roboclaw_comms_.connect(config_.device, config_.baud_rate, config_.timeout_ms);
 
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Successfully activated!");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Successfully activated!");
 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  hardware_interface::CallbackReturn DiffBotSystemHardware::on_deactivate(
+  hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_deactivate(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Deactivating ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Deactivating ...please wait...");
 
     roboclaw_comms_.disconnect();
 
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Successfully deactivated!");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Successfully deactivated!");
 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  hardware_interface::return_type DiffBotSystemHardware::read(
+  hardware_interface::return_type DiffDriveRoboclawHardware::read(
       const rclcpp::Time & /*time*/, const rclcpp::Duration &period)
   {
 
@@ -211,10 +211,10 @@ namespace ros2_control_demo_example_2
     return hardware_interface::return_type::OK;
   }
 
-  hardware_interface::return_type ros2_control_demo_example_2 ::DiffBotSystemHardware::write(
+  hardware_interface::return_type diffdrive_roboclaw ::DiffDriveRoboclawHardware::write(
       const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
   {
-    // RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Writing...");
+    // RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Writing...");
 
     int motor_lf_qpps = wheel_lf_.cmd / wheel_lf_.rads_per_count;
     int motor_lb_qpps = wheel_lb_.cmd / wheel_lb_.rads_per_count;
@@ -225,8 +225,8 @@ namespace ros2_control_demo_example_2
     return hardware_interface::return_type::OK;
   }
 
-} // namespace ros2_control_demo_example_2
+} // namespace diffdrive_roboclaw
 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(
-    ros2_control_demo_example_2::DiffBotSystemHardware, hardware_interface::SystemInterface)
+    diffdrive_roboclaw::DiffDriveRoboclawHardware, hardware_interface::SystemInterface)
