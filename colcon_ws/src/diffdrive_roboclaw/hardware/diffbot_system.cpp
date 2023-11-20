@@ -157,30 +157,44 @@ namespace diffdrive_roboclaw
     return command_interfaces;
   }
 
-  hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_activate(
+  hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_configure(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Activating ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Configuring ...please wait...");
     RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), config_.device.c_str());
     RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), std::to_string(config_.baud_rate).c_str());
     RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), std::to_string(config_.timeout_ms).c_str());
 
     roboclaw_comms_.connect(config_.device, config_.baud_rate, config_.timeout_ms);
 
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Successfully activated!");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Successfully Configured!");
 
+    return hardware_interface::CallbackReturn::SUCCESS;
+  }
+
+  hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_cleanup(
+      const rclcpp_lifecycle::State & /*previous_state*/)
+  {
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Cleaning up ...please wait...");
+
+    roboclaw_comms_.disconnect();
+
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Successfully Cleaned up!");
+
+    return hardware_interface::CallbackReturn::SUCCESS;
+  }
+
+  hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_activate(
+      const rclcpp_lifecycle::State & /*previous_state*/)
+  {
+    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Successfully activated!");
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
   hardware_interface::CallbackReturn DiffDriveRoboclawHardware::on_deactivate(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Deactivating ...please wait...");
-
-    roboclaw_comms_.disconnect();
-
     RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), "Successfully deactivated!");
-
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 

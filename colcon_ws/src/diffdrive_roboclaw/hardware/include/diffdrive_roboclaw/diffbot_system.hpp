@@ -52,7 +52,8 @@ namespace diffdrive_roboclaw
       int enc_counts_per_rev = 0;
     };
 
-    public : RCLCPP_SHARED_PTR_DEFINITIONS(DiffDriveRoboclawHardware)
+  public:
+    RCLCPP_SHARED_PTR_DEFINITIONS(DiffDriveRoboclawHardware)
 
     DIFFDRIVE_ROBOCLAW_PUBLIC
     hardware_interface::CallbackReturn on_init(
@@ -63,6 +64,14 @@ namespace diffdrive_roboclaw
 
     DIFFDRIVE_ROBOCLAW_PUBLIC
     std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
+
+    DIFFDRIVE_ROBOCLAW_PUBLIC
+    hardware_interface::CallbackReturn on_configure(
+        const rclcpp_lifecycle::State &previous_state) override;
+
+    DIFFDRIVE_ROBOCLAW_PUBLIC
+    hardware_interface::CallbackReturn on_cleanup(
+        const rclcpp_lifecycle::State &previous_state) override;
 
     DIFFDRIVE_ROBOCLAW_PUBLIC
     hardware_interface::CallbackReturn on_activate(
