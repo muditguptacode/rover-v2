@@ -214,13 +214,12 @@ namespace ros2_control_demo_example_2
   hardware_interface::return_type ros2_control_demo_example_2 ::DiffBotSystemHardware::write(
       const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Writing...");
+    // RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), "Writing...");
 
     int motor_lf_qpps = wheel_lf_.cmd / wheel_lf_.rads_per_count;
     int motor_lb_qpps = wheel_lb_.cmd / wheel_lb_.rads_per_count;
     int motor_rf_qpps = wheel_rf_.cmd / wheel_rf_.rads_per_count;
     int motor_rb_qpps = wheel_rb_.cmd / wheel_rb_.rads_per_count;
-    RCLCPP_INFO(rclcpp::get_logger("DiffBotSystemHardware"), std::to_string(motor_rf_qpps).c_str());
     roboclaw_comms_.set_motor_values(motor_lf_qpps, motor_lb_qpps, motor_rf_qpps, motor_rb_qpps);
 
     return hardware_interface::return_type::OK;
