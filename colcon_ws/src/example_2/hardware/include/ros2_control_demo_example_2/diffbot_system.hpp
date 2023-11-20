@@ -52,7 +52,7 @@ namespace ros2_control_demo_example_2
       int enc_counts_per_rev = 0;
     };
 
-    public : RCLCPP_SHARED_PTR_DEFINITIONS(DiffBotSystemHardware);
+    public : RCLCPP_SHARED_PTR_DEFINITIONS(DiffBotSystemHardware)
 
     ROS2_CONTROL_DEMO_EXAMPLE_2_PUBLIC
     hardware_interface::CallbackReturn on_init(
