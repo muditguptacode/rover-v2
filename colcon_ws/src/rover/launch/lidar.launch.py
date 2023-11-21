@@ -10,7 +10,7 @@ def generate_launch_description():
                 package="xv_11_driver",
                 executable="xv_11_driver",
                 output="screen",
-                parameters=[{"port": "usb-Adafruit_Flora-if00", "frame_id": "laser_frame"}],
+                parameters=[{"port": "/dev/serial/by-id/usb-Adafruit_Flora-if00", "frame_id": "laser_frame"}],
             )
         ]
     )
