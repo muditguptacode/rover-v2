@@ -32,6 +32,13 @@ def generate_launch_description():
 
     controller_params_file = os.path.join(get_package_share_directory(package_name), 'config', 'my_controllers.yaml')
 
+    lidar_node = Node(
+                package="xv_11_driver",
+                executable="xv_11_driver",
+                output="screen",
+                parameters=[{"port": "/dev/serial/by-id/usb-Adafruit_Flora-if00", "frame_id": "laser_frame"}],
+            )
+
     controller_manager = Node(package="controller_manager",
         executable="ros2_control_node",
         parameters=[{'robot_description': robot_description},
@@ -70,6 +77,7 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
+        lidar_node,
         rsp,
         delayed_controller_manager,
         delayed_diff_drive_spawner, 
