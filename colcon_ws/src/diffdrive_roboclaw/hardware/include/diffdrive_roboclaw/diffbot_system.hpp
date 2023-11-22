@@ -96,6 +96,7 @@ namespace diffdrive_roboclaw
     Wheel wheel_lb_;
     Wheel wheel_rf_;
     Wheel wheel_rb_;
+    double main_battery_voltage_;
   };
 
 } // namespace diffdrive_roboclaw

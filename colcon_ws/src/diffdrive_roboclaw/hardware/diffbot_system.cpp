@@ -100,6 +100,25 @@ namespace diffdrive_roboclaw
       }
     }
 
+    // Check if DiffDriveRoboclawHardware voltage sensor has exactly 1 state interface
+    if (info_.sensors[0].state_interfaces.size() != 1)
+    {
+      RCLCPP_FATAL(
+          rclcpp::get_logger("DiffDriveRoboclawHardware"),
+          "Sensor '%s' has %zu state interface. 1 expected.", info_.sensors[0].name.c_str(),
+          info_.sensors[0].state_interfaces.size());
+      return hardware_interface::CallbackReturn::ERROR;
+    }
+
+    // check if DiffDriveRoboclawHardware voltage sensor state interface is called 'voltage'
+    if (info_.sensors[0].state_interfaces[0].name != "voltage")
+    {
+      RCLCPP_FATAL(
+          rclcpp::get_logger("DiffDriveRoboclawHardware"),
+          "Sensor '%s' has '%s' as state interface. 'voltage' expected.", info_.sensors[0].name.c_str(),
+          info_.sensors[0].state_interfaces[0].name.c_str());
+      return hardware_interface::CallbackReturn::ERROR;
+    }
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
@@ -130,6 +149,10 @@ namespace diffdrive_roboclaw
         wheel_rb_.name, hardware_interface::HW_IF_POSITION, &wheel_rb_.pos));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         wheel_rb_.name, hardware_interface::HW_IF_VELOCITY, &wheel_rb_.vel));
+
+    // voltage sensor
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.sensors[0].name, info_.sensors[0].state_interfaces[0].name, &main_battery_voltage_));
 
     return state_interfaces;
   }
@@ -221,6 +244,8 @@ namespace diffdrive_roboclaw
     pos_prev = wheel_rb_.pos;
     wheel_rb_.pos = wheel_rb_.calc_enc_angle();
     wheel_rb_.vel = (wheel_rb_.pos - pos_prev) / delta_seconds;
+
+    roboclaw_comms_.read_roboclaw_battery(main_battery_voltage_);
 
     return hardware_interface::return_type::OK;
   }

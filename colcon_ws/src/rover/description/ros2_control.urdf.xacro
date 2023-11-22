@@ -45,6 +45,9 @@
             <state_interface name="position" />
             <state_interface name="velocity" />
         </joint>
+        <sensor name="main_battery_voltage">
+            <state_interface name="voltage" />
+        </sensor>
     </ros2_control>
 
 

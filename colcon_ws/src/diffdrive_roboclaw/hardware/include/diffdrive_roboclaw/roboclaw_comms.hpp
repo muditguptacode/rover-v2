@@ -28,6 +28,14 @@ public:
     //     return roboclaw_connections->isConnected();
     // }
 
+    void read_roboclaw_battery(double &voltage)
+    {
+        int16_t voltage_left, voltage_right;
+        roboclaw_main_battery_voltage(rc, left_addr, &voltage_left);
+        roboclaw_main_battery_voltage(rc, right_addr, &voltage_right);
+        voltage = (voltage_left + voltage_right) / 2;
+    }
+
     void read_encoder_values(int &val_1, int &val_2, int &val_3, int &val_4)
     {
         roboclaw_encoders(rc, left_addr, &val_1, &val_2);
@@ -43,8 +51,8 @@ public:
 private:
     struct roboclaw *rc;
     int timeout_ms_;
-    uint8_t left_addr = 0x81;
-    uint8_t right_addr = 0x80;
+    uint8_t left_addr = 0x81; // TODO: get these from the params file
+    uint8_t right_addr = 0x80; // TODO: get these from the params file
 };
 
 #endif // DIFFDRIVE_ROBOCLAW_ROBOCLAW_COMMS
