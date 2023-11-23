@@ -17,3 +17,39 @@ rover_platform_broadcaster:
       default_value: 0.0,
       description: "The voltage of the main battery in Deci Volts.",
     }
+  main_battery_capacity:
+    {
+      type: double,
+      default_value: 10.0,
+      description: "The Capacity of the main battery in Ah",
+    }
+  main_battery_charge_percetage:
+    {
+      type: double,
+      default_value: 0.0,
+      description: "The charge percentageof the main battery in percentage",
+    }
+  main_battery_present:
+    {
+      type: bool,
+      default_value: true,
+      description: "The presence of the main battery",
+    }
+  main_battery_location:
+    {
+      type: string,
+      default_value: "rear",
+      description: "The location of the main battery",
+    }
+  main_battery_serial:
+    {
+      type: string,
+      default_value: "lantern_battery_pod_1",
+      description: "The serial number of the main battery",
+    }
+  main_power_supply_technology:
+    {
+      type: int,
+      default_value: 3,
+      description: "The technology of the main battery",
+    }

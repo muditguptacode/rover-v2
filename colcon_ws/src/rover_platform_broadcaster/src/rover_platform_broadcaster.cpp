@@ -76,6 +76,12 @@ namespace rover_platform_broadcaster
     realtime_publisher_->lock();
     realtime_publisher_->msg_.header.frame_id = params_.frame_id;
     realtime_publisher_->msg_.voltage = params_.main_battery_voltage;
+    realtime_publisher_->msg_.capacity = params_.main_battery_capacity;
+    realtime_publisher_->msg_.percentage = params_.main_battery_charge_percetage;
+    realtime_publisher_->msg_.present = params_.main_battery_present;
+    realtime_publisher_->msg_.location = params_.main_battery_location;
+    realtime_publisher_->msg_.serial_number = params_.main_battery_serial;
+    realtime_publisher_->msg_.power_supply_technology = params_.main_power_supply_technology;
     realtime_publisher_->unlock();
 
     RCLCPP_DEBUG(get_node()->get_logger(), "configure successful");
