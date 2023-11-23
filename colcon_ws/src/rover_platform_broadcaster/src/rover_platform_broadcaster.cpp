@@ -120,7 +120,7 @@ namespace rover_platform_broadcaster
     {
       realtime_publisher_->msg_.header.stamp = time;
       // range_sensor_->get_values_as_message(realtime_publisher_->msg_);
-      realtime_publisher_->msg_.voltage = 20.0;
+      realtime_publisher_->msg_.voltage = state_interfaces_[0].get_value();
       realtime_publisher_->unlockAndPublish();
     }
 
