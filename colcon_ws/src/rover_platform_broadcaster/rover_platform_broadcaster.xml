@@ -1,0 +1,8 @@
+<library path="rover_platform_broadcaster">
+  <class name="rover_platform_broadcaster/RoverPlatformBroadcaster"
+         type="rover_platform_broadcaster::RoverPlatformBroadcaster" base_class_type="controller_interface::ControllerInterface">
+  <description>
+	  This controller publishes general platform information, such as battery voltage, current, etc.
+  </description>
+  </class>
+</library>

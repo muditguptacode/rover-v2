@@ -10,7 +10,7 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     rover_platform_broadcaster:
-      type: range_sensor_broadcaster/RoverPlatformBroadcaster
+      type: rover_platform_broadcaster/RoverPlatformBroadcaster
 
 diff_cont:
   ros__parameters:

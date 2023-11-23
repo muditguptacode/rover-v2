@@ -246,7 +246,7 @@ namespace diffdrive_roboclaw
     wheel_rb_.vel = (wheel_rb_.pos - pos_prev) / delta_seconds;
 
     roboclaw_comms_.read_roboclaw_battery(main_battery_voltage_);
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), std::to_string(main_battery_voltage_).c_str());
+    // RCLCPP_INFO(rclcpp::get_logger("DiffDriveRoboclawHardware"), std::to_string(main_battery_voltage_).c_str());
     return hardware_interface::return_type::OK;
   }
 
