@@ -64,7 +64,5 @@ diff_cont:
 
 rover_platform_broadcaster:
   ros__parameters:
-    sensor_name: "platform"
+    sensor_name: "main_battery_voltage/voltage"
     frame_id: "platform_frame"
-# joint_broad:
-#   ros__parameters:
