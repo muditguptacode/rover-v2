@@ -61,6 +61,20 @@ def generate_launch_description():
         )
     )
 
+    rover_platform_broadcaster_spawner = Node(package="controller_manager",
+        executable="spawner",
+        arguments=["rover_platform_broadcaster"]
+    )
+
+    delayed_drover_platform_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[
+                rover_platform_broadcaster_spawner
+            ]
+        )
+    )
+
     joint_broad_spawner = Node(package="controller_manager",
         executable="spawner",
         arguments=["joint_broad"]
@@ -81,5 +95,6 @@ def generate_launch_description():
         rsp,
         delayed_controller_manager,
         delayed_diff_drive_spawner, 
-        delayed_joint_broad_spawner
+        delayed_joint_broad_spawner,
+        delayed_drover_platform_broadcaster_spawner
     ])

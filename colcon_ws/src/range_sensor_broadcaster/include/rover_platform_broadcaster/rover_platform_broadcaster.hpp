@@ -29,8 +29,10 @@
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 #include "realtime_tools/realtime_publisher.h"
-#include "semantic_components/range_sensor.hpp"
-#include "sensor_msgs/msg/range.hpp"
+// #include "semantic_components/range_sensor.hpp"
+// #include "sensor_msgs/msg/range.hpp"
+#include "sensor_msgs/msg/battery_state.hpp"
+
 
 namespace rover_platform_broadcaster
 {
@@ -65,10 +67,10 @@ protected:
   std::shared_ptr<ParamListener> param_listener_;
   Params params_;
 
-  std::unique_ptr<semantic_components::RangeSensor> range_sensor_;
+  // std::unique_ptr<semantic_components::RangeSensor> range_sensor_;
 
-  using StatePublisher = realtime_tools::RealtimePublisher<sensor_msgs::msg::Range>;
-  rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr sensor_state_publisher_;
+  using StatePublisher = realtime_tools::RealtimePublisher<sensor_msgs::msg::BatteryState>;
+  rclcpp::Publisher<sensor_msgs::msg::BatteryState>::SharedPtr battery_state_publisher_;
   std::unique_ptr<StatePublisher> realtime_publisher_;
 };
 
