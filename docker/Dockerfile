@@ -2,7 +2,8 @@
 FROM arm64v8/ros:humble
 
 # Clone the rover project repo from github
-RUN git clone https://github.com/muditguptacode/rover-v2.git
+# RUN git clone https://github.com/muditguptacode/rover-v2.git
+COPY ~/rover-v2 /rover-v2 
 
 # Install the ros packages
 RUN apt update && apt install ros-humble-ros2-control ros-humble-ros2-controllers ros-dev-tools ros-humble-xacro ros-humble-joy ros-humble-teleop-twist-joy libboost-all-dev -y 
