@@ -56,8 +56,8 @@ class UiNode(Node):
         # Build UI
 
         self.ttk = Tk()
-        self.ttk.title("Bot UI")
-        self.ttk.geometry("1024x600+0+0")
+        self.ttk.title("Bot Eye UI")
+        self.ttk.geometry("1200x800+0+0")
 
         if self.fullscreen:
             self.ttk.bind("<Escape>", self.end_fullscreen)

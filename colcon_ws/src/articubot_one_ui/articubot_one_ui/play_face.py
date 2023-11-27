@@ -34,8 +34,8 @@ class FacePlayer(Node):
         # self.width=1024
         # self.height=576
 
-        self.nomwidth = 800
-        self.nomheight = 480
+        self.nomwidth = 1200
+        self.nomheight = 800
 
         self.pupil_x_l = 0
         self.pupil_y_l = 0

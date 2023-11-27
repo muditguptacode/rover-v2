@@ -12,13 +12,13 @@ class FacePlayerCars():
     def __init__(self, root):
 
 
-        self.width=1024
-        self.height=600
+        self.width=1200
+        self.height=800
 
 
 
-        self.nomwidth = 800
-        self.nomheight = 480
+        self.nomwidth = 1200
+        self.nomheight = 800
 
         self.eye_pos = 0
         self.squint_amount = 0
