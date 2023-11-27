@@ -17,13 +17,23 @@ ros.on("close", () => {
 });
 
 // Create a listener for /my_topic
-const my_topic_listener = new ROSLIB.Topic({
+const cmd_vel_listener = new ROSLIB.Topic({
   ros,
   name: "/diff_cont/cmd_vel_unstamped",
   messageType: "geometry_msgs/msg/Twist",
 });
 
 // When we receive a message on /my_topic, add its data as a list item to the "messages" ul
-my_topic_listener.subscribe((message) => {
+cmd_vel_listener.subscribe((message) => {
   setEye(message);
+});
+
+const battery_listener = new ROSLIB.Topic({
+  ros,
+  name: "/rover_platform_broadcaster/battery_state",
+  messageType: "sensor_msgs/msg/BatteryState",
+});
+
+battery_listener.subscribe((message) => {
+  setBattery(message);
 });

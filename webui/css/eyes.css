@@ -36,4 +36,17 @@ body {
     content: " ";
 }
 
-/* ///derp */
+.ui {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+.battery {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 40px;
+}
