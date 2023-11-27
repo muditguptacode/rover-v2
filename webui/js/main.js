@@ -27,5 +27,3 @@ const my_topic_listener = new ROSLIB.Topic({
 my_topic_listener.subscribe((message) => {
   setEye(message);
 });
-
-setEye(0);
