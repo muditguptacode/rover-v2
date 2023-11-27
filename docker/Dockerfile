@@ -22,5 +22,5 @@ RUN . install/setup.sh
 # Set .bashrc to source the workspace
 WORKDIR /root
 RUN touch .bashrc
-RUN echo "source /rover-v2/colcon_ws/install/setup.bash" >> ~/.bashrc
-RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+RUN echo "source /rover-v2/colcon_ws/install/setup.bash" >> .bashrc
+RUN echo "source /opt/ros/humble/setup.bash" >> .bashrc
