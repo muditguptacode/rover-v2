@@ -24,3 +24,6 @@ WORKDIR /root
 RUN touch .bashrc
 RUN echo "source /rover-v2/colcon_ws/install/setup.bash" >> .bashrc
 RUN echo "source /opt/ros/humble/setup.bash" >> .bashrc
+
+# GO back to main directory
+WORKDIR /rover-v2/colcon_ws
