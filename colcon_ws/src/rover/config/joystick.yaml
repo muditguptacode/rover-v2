@@ -1,6 +1,6 @@
 joy_node:
   ros__parameters:
-    device_id: /dev/input/by-id/usb-Valve_Software_Steam_Controller-event-mouse
+    device_id: 0
     deadzone: 0.05
     autorepeat_rate: 20.0
 
