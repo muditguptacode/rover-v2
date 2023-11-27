@@ -1,1 +1,1 @@
-DISPLAY=:0 chromium-browser -kiosk --incognito http://10.10.20.100:8080
+DISPLAY=:0 chromium-browser -kiosk --incognito http://10.10.20.152:8080
