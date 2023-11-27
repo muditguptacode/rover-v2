@@ -22,8 +22,11 @@ class FacePlayer(Node):
         self.subscription  # prevent unused variable warning
 
 
-        self.width=800
-        self.height=480
+        # self.width=800
+        # self.height=480
+
+        self.width=1200
+        self.height=800
 
         # self.width=1920
         # self.height=1080
