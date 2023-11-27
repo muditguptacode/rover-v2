@@ -27,8 +27,7 @@ docker run -it \
 --pid=host \
 --device=/dev/serial/by-id/usb-Adafruit_Flora-if00  \
 --device=/dev/serial/by-id/usb-03eb_USB_Roboclaw_2x30A-if00 \
---device=/dev/input/event0 \
---device=/dev/input/event2 \
+--device=/dev/input/by-id/usb-Valve_Software_Steam_Controller-event-mouse \
 docker_ros_rover:v1
 
 
