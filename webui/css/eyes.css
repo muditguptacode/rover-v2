@@ -1,0 +1,39 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.move-area {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: orange;
+}
+
+.container {}
+
+.eye {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    height: 550px;
+    width: 550px;
+    background: #CCC;
+    margin: 40px;
+}
+
+.eye:after {
+    position: absolute;
+    bottom: 380px;
+    right: 180px;
+    width: 200px;
+    height: 200px;
+    background: #000;
+    border-radius: 50%;
+    content: " ";
+}
+
+/* ///derp */

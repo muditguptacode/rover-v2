@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <h1>Rosbridge demo</h1>
 
-    <p>To see this page update:</p>
-    <ul>
-      <li>Run a Rosbridge connection at <code>ws://localhost:9090</code></li>
-      <li>Start publishing ROS messages to <code>/my_topic</code></li>
-    </ul>
+<head>
+  <meta charset="utf-8" />
+  <!-- add library files -->
+  <script type="text/javascript" src="js/lib/roslib.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- add css file -->
+  <link rel="stylesheet" type="text/css" href="css/eyes.css" />
+</head>
 
-    <p>View the full tutorial at <a href="https://foxglove.dev/blog/using-rosbridge-with-ros1" target="_blank">Using Rosbridge with ROS 1</a> or <a href="https://foxglove.dev/blog/using-rosbridge-with-ros2" target="_blank">Using Rosbridge with ROS 2</a>.</p>
+<body>
+  <section class="move-area">
+    <div class='container'>
+      <div class='eye'></div>
+      <div class='eye'></div>
+    </div>
+  </section>
+  <script type="text/javascript" type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" type="text/javascript" src="js/eyes.js"></script>
+</body>
 
-    <hr/>
-
-    <p>Connection: <span id="status" style="font-weight: bold;">N/A</span></p>
-    <p><code>/my_topic</code> messages received: <ul id="messages" style="font-weight: bold;"></ul></p>
-
-    <script type="text/javascript" src="js/lib/roslib.js"></script>
-
-    <script type="text/javascript" type="text/javascript" src="js/main.js"></script>
-  </body>
 </html>
