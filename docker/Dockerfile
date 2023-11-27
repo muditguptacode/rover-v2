@@ -12,8 +12,8 @@ RUN npm install http-server -g
 COPY ./rover-v2 /rover-v2 
 
 # Start web server
-WORKDIR /rover-v2/webui
-CMD http-server -p 8080 &
+# WORKDIR /rover-v2/webui
+# CMD http-server -p 8080 &
 
 # Source the workspace
 WORKDIR /rover-v2/colcon_ws

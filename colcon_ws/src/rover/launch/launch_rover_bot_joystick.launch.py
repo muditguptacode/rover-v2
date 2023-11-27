@@ -106,6 +106,11 @@ def generate_launch_description():
                 remappings=[('/cmd_vel', 'diff_cont/cmd_vel_unstamped')]
             )
 
+    ros_bridge_node = Node(
+                package="rosbridge_server",
+                executable="rosbridge_websocket"
+            )
+
     # Launch them all!
     return LaunchDescription([
         lidar_node,
@@ -115,5 +120,6 @@ def generate_launch_description():
         delayed_joint_broad_spawner,
         delayed_drover_platform_broadcaster_spawner,
         joy_node,
-        teleop_node
+        teleop_node,
+        ros_bridge_node
     ])
