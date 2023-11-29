@@ -22,10 +22,13 @@ docker run \
 docker_ros_rover:v1
 
 # Wait for docker to start
-sleep 5
+sleep 3
 
 # Launch Main rover package
 docker exec -d ros2_rover bash -c "source /opt/ros/humble/setup.bash && source /rover-v2/colcon_ws/install/setup.bash && ros2 launch rover launch_rover_bot_joystick.launch.py"
+
+# wait for ros2 nodes to start
+sleep 5
 
 # Launch http server and webui
 docker exec -w "/rover-v2/webui/" -d ros2_rover bash -c "http-server ."
